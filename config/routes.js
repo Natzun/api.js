@@ -24,7 +24,7 @@ routes.post('/add', (req, res) => {
     return res.json(body);
 });
 
-routes.delete('/:id', (req, res) => {
+routes.delete('/del/:id', (req, res) => {
     const id = req.params.id;
 
     let newDB = db.filter(item =>{
@@ -35,6 +35,15 @@ routes.delete('/:id', (req, res) => {
     db = newDB;
 
     return res.send(newDB);
+});
+
+routes.put('/put/:id', (req, res) => {
+    const modifyID = req.params.id;
+    const body = req.body;
+
+    db[modifyID] = {[modifyID]: body};
+
+    return res.json(db[modifyID]); // vai retornar tudo que editou
 });
 
 module.exports = routes;
